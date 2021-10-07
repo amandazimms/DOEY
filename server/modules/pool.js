@@ -2,7 +2,7 @@
 const pg = require('pg');
 
 const pool = new pg.Pool({
-  database: 'koala_holla', //todo this 'NAME' changes based on your project
+  database: 'to_do_list', //todo this 'NAME' changes based on your project
   host: 'localhost',
   port: 5432,
   max: 12,
