@@ -23,15 +23,33 @@ function addNewTask(){
     data: taskObj
 
   }).then( function (response) {
-    postAllTasks();
+    displayAllTasks();
     $( '#taskIn' ).val();
 
   }).catch(function ( err ){
-    alert(`error adding task`);
-    console.log(err);
+    console.log('error sending task to server', err);
+    alert(`error sending task to server - see console`);
   });
 }
 
-function postAllTasks(){
+function displayAllTasks(){
   console.log('posting all tasks');
+
+  $.ajax({
+    method: 'GET',
+    url: '/tasks'
+
+  }).then (function(response) {
+    let outputArea = $( '#outputDiv' );
+    outputArea.empty();
+
+    for(let i=0; i<response.length; i++){
+      outputArea.append( //todo add checkbox
+        `<li>${response[i].task}</li>`);
+    }
+
+  }).catch(function(err) {
+    console.log('error getting tasks from server:', err);
+    alert('error getting tasks from server - see console');
+  });
 }

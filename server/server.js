@@ -29,4 +29,20 @@ app.post('/tasks', (req, res) => {
     console.log('error posting task:', err);
     res.sendStatus(500);
   })
-})
+});
+
+//GET
+app.get('/tasks', (req, res) => {
+  console.log('/get hit! req.body is:', req.body);
+  console.log('/get hit! req.query is:', req.query);
+
+  const queryString = `SELECT * FROM tasks`; //todo order by ___?
+
+  pool.query(queryString).then( (results) => {
+    res.send(results.rows);
+
+  }).catch( (err) => {
+    console.log('error getting tasks from database:', err);
+    res.sendStatus(500);
+  })
+});
