@@ -17,13 +17,14 @@ app.listen(PORT, () => {
 //POST
 app.post('/tasks', (req, res) => {
   console.log('/post hit! req.query is:', req.query);
+  console.log('/post hit! req.body is:', req.body);
 
-  const queryString= ``;
-  let values = [];
+  const queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`;
+  let values = [req.body.task, req.body.completed];
 
   pool.query(queryString, values).then((results)=>{
     res.sendStatus(201);
-    
+
   }).catch((err)=>{
     console.log('error posting task:', err);
     res.sendStatus(500);
