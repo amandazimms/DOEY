@@ -2,6 +2,29 @@
   font-family: 'Source Code Pro', monospace;
 }
 
+h1 {
+  margin-left: 15px;
+  font-weight: bold;
+}
+button {
+  border-radius: 0;
+  border-style: none;
+  background-color: rgb(133, 160, 165);
+  padding: 5px 8px 5px 8px;
+}
+
+input {
+  margin: 0 0 15px 15px;
+  border-radius: 0;
+  border-style: none;
+  background-color: rgb(174, 197, 201);
+  padding: 5px 8px 5px 8px;
+}
+
+body {
+  background-color: rgb(232, 241, 241);
+}
+
 #taskIn {
   width: 300px;
 }
@@ -26,4 +49,9 @@
 
 .task{
   margin: 10px;
+}
+
+.taskComplete {
+  text-decoration: line-through;
+  color: rgb(158, 158, 158)
 }

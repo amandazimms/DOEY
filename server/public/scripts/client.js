@@ -69,13 +69,18 @@ function displayAllTasks(){
       let stringToAppend = '';
       
       if(response[i].completed) {
-        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonChecked " data-id='${response[i].id}'><img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task"></img></button>`;
+        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonChecked " data-id='${response[i].id}'>
+                          <img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task">
+                          </img></button>
+                          <a class="taskText taskComplete" data-id='${response[i].id}'>${response[i].task}</a>`;
       }
       else {
-        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'><img class="iconImg" src="./images/box.png" alt="Complete Task"></img></button>`;
+        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'>
+                          <img class="iconImg" src="./images/box.png" alt="Complete Task">
+                          </img></button>
+                          <a class="taskText" data-id='${response[i].id}'>${response[i].task}</a>`;
       }
-      stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a>
-                        <button class="iconButton deleteButton" data-id='${response[i].id}'><img class="iconImg" src="./images/trash.png" alt="Delete Task"></img></button>
+      stringToAppend += `<button class="iconButton deleteButton" data-id='${response[i].id}'><img class="iconImg" src="./images/trash.png" alt="Delete Task"></img></button>
                         <br></div>`;
 
       outputArea.append(stringToAppend);    
@@ -88,7 +93,6 @@ function displayAllTasks(){
 }
 
 function removeTask(){
-  console.log(' in remove');
   $.ajax({
     method: 'DELETE',
     url: '/tasks?id=' + $(this).data('id'), 
