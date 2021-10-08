@@ -16,8 +16,7 @@ app.listen(PORT, () => {
 
 //POST
 app.post('/tasks', (req, res) => {
-  console.log('/post hit! req.query is:', req.query);
-  console.log('/post hit! req.body is:', req.body);
+  console.log('/tasks post hit! req.body is:', req.body);
 
   const queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`;
   let values = [req.body.task, req.body.completed];
@@ -33,8 +32,7 @@ app.post('/tasks', (req, res) => {
 
 //GET
 app.get('/tasks', (req, res) => {
-  console.log('/get hit! req.body is:', req.body);
-  console.log('/get hit! req.query is:', req.query);
+  console.log('/tasks get hit!');
 
   const queryString = `SELECT * FROM tasks`; //todo order by ___?
 
@@ -46,3 +44,23 @@ app.get('/tasks', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+//PUT
+app.put('/tasks', (req,res) => {
+  console.log( '/tasks put hit:', req.query );
+
+  let key = `${Object.keys(req.body)[0]}` //this gets, for example, 'completed' from client PUT's data
+  let val = `${req.body[key]}` //this gets, for example, 'true' from client PUT's data
+
+  const queryString =   `UPDATE tasks SET ${key}=${val}
+                        WHERE id = '${req.query.id}';`;
+
+  pool.query(queryString).then( (results) => {
+    res.sendStatus(200);
+  }).catch( (err) =>{
+    console.log('error updating task in database:', err);
+    res.sendStatus(500);
+
+  })
+
+})

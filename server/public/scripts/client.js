@@ -1,12 +1,27 @@
-console.log( 'js' );
-
 $( document ).ready( function(){
-  console.log( 'JQ' );
   setupClickListeners();
 });
 
 function setupClickListeners() {
   $( '#addTaskButton' ).on( 'click', addNewTask );
+  $('#outputDiv').on('click', '.check-box', checkBoxToMarkComplete);
+}
+
+function checkBoxToMarkComplete(){
+//todo - this only marks the box 'checked' - no way to uncheck it and set back to 'incomplete'
+  $.ajax({
+    method: 'PUT',
+    url: '/tasks?id=' + $(this).data('id'), 
+    data: 'completed=true'
+
+  }).then(function(response){
+    displayAllTasks();
+
+  }).catch(function(err){
+    console.log('error updating task complete', err);
+    alert(`error updating task complete - see console`);
+  });
+
 }
 
 function addNewTask(){
@@ -33,7 +48,6 @@ function addNewTask(){
 }
 
 function displayAllTasks(){
-  console.log('posting all tasks');
 
   $.ajax({
     method: 'GET',
@@ -44,8 +58,18 @@ function displayAllTasks(){
     outputArea.empty();
 
     for(let i=0; i<response.length; i++){
-      outputArea.append( //todo add checkbox
-        `<li>${response[i].task}</li>`);
+      let stringToAppend = '';
+      
+      if(response[i].completed) 
+        stringToAppend += `<input type='checkbox' checked=checked class='check-box' data-id='${response[i].id}'></input>`;
+      else 
+        stringToAppend += `<input type='checkbox' class='check-box' data-id='${response[i].id}'></input>`;
+
+      stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a><br>`;
+
+      outputArea.append(stringToAppend);
+       
+        
     }
 
   }).catch(function(err) {
