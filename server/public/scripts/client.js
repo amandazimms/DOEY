@@ -1,30 +1,36 @@
 $( document ).ready( function(){
+  displayAllTasks();
+
   setupClickListeners();
 });
 
 function setupClickListeners() {
   $( '#addTaskButton' ).on( 'click', addNewTask );
-  $('#outputDiv').on('click', '.check-box', checkBoxToMarkComplete);
+  $('#outputDiv').on('click', '.checkButtonUnchecked', {param: true}, toggleCheck);
+  $('#outputDiv').on('click', '.checkButtonChecked', {param: false}, toggleCheck);
   $('#outputDiv').on('click', '.deleteTaskButton', removeTask);
-
 }
 
-function checkBoxToMarkComplete(){
-//todo - this only marks the box 'checked' - no way to uncheck it and set back to 'incomplete'
-  $.ajax({
-    method: 'PUT',
-    url: '/tasks?id=' + $(this).data('id'), 
-    data: 'completed=true'
+function toggleCheck(_bool){  
+  let bool = _bool.data.param;
 
-  }).then(function(response){
-    displayAllTasks();
+  let dataToSend = 'completed=false';
+  if (bool)
+    dataToSend = 'completed=true'; 
 
-  }).catch(function(err){
-    console.log('error updating task complete', err);
-    alert(`error updating task complete - see console`);
-  });
-
-}
+    $.ajax({
+      method: 'PUT',
+      url: '/tasks?id=' + $(this).data('id'), 
+      data: dataToSend
+  
+    }).then(function(response){
+      displayAllTasks();
+  
+    }).catch(function(err){
+      console.log('error updating task complete', err);
+      alert(`error updating task complete - see console`);
+    });
+  }
 
 function addNewTask(){
   let taskString =  $( '#taskIn' ).val();
@@ -62,18 +68,17 @@ function displayAllTasks(){
     for(let i=0; i<response.length; i++){
       let stringToAppend = '';
       
-      if(response[i].completed) 
-        stringToAppend += `<input type='checkbox' checked=checked class='check-box' data-id='${response[i].id}'></input>`;
-      else 
-        stringToAppend += `<input type='checkbox' class='check-box' data-id='${response[i].id}'></input>`;
-
+      if(response[i].completed) {
+        stringToAppend += `<button class="checkButton checkButtonChecked " data-id='${response[i].id}'><img class="checkImg imgChecked" src="./images/checkedBox.png" alt="Checked-Box"></img></button>`;
+      }
+      else {
+        stringToAppend += `<button class="checkButton checkButtonUnchecked" data-id='${response[i].id}'><img class="checkImg imgUnchecked" src="./images/box.png" alt="Unchecked-Box"></img></button>`;
+      }
       stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a>
                         <button class='deleteTaskButton' data-id='${response[i].id}'>Delete</button>
                         <br>`;
 
-      outputArea.append(stringToAppend);
-       
-        
+      outputArea.append(stringToAppend);    
     }
 
   }).catch(function(err) {
