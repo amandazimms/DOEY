@@ -24,7 +24,7 @@ You are going to create a 'TO DO' application. This type of application is very 
 ### Styling
 
 <!-- Use CSS styling to move the aesthetic of the page beyond the vanilla HTML look: -->
-    <!-- - background color of the page -->
+  <!-- - background color of the page -->
   <!-- - font family and size -->
   <!-- - text color & or background color of tasks *to show whether or not they have been completed* -->
 
@@ -51,10 +51,10 @@ For each of your strech goals, you will be practicing git branching. Please refe
       -  Inputs -- make your text inputs styled in the bootstrap way
       -  Responsive -- make your app responsive to different screen sizes -- check out the [Layout](https://getbootstrap.com/docs/4.1/layout/overview/) section
 
-- `feature-confirm-delete`
+<!-- - `feature-confirm-delete`
 
     - [ ]  In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task.
-        - Some styled options are [Bootstrap Modal](https://getbootstrap.com/docs/4.0/components/modal/) or [Sweet Alerts](https://sweetalert.js.org/guides/): Use the CDN option.
+        - Some styled options are [Bootstrap Modal](https://getbootstrap.com/docs/4.0/components/modal/) or [Sweet Alerts](https://sweetalert.js.org/guides/): Use the CDN option. -->
 
 - `feature-ordering-task-query` 
 

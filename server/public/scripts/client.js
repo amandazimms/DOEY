@@ -93,15 +93,30 @@ function displayAllTasks(){
 }
 
 function removeTask(){
-  $.ajax({
-    method: 'DELETE',
-    url: '/tasks?id=' + $(this).data('id'), 
 
-  }).then(function(response){
-    displayAllTasks();
 
-  }).catch(function(err){
-    console.log('error deleting task', err);
-    alert(`error deleting task - see console`);
-  });
+  Swal.fire({
+    text: 'Are you sure you want to remove this task?',
+    icon: 'question',
+    confirmButtonText: 'Yes',
+    showCancelButton: true,
+    cancelButtonText: 'No'
+  }).then((result)=>{
+    if (result.isConfirmed){
+      $.ajax({
+        method: 'DELETE',
+        url: '/tasks?id=' + $(this).data('id'), 
+    
+      }).then(function(response){
+        displayAllTasks();
+    
+      }).catch(function(err){
+        console.log('error deleting task', err);
+        alert(`error deleting task - see console`);
+      })
+    }
+  })
+
+
+ 
 }
