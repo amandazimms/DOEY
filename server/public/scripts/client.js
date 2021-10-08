@@ -39,7 +39,7 @@ function addNewTask(){
 
   }).then( function (response) {
     displayAllTasks();
-    $( '#taskIn' ).val();
+    $( '#taskIn' ).val('');
 
   }).catch(function ( err ){
     console.log('error sending task to server', err);

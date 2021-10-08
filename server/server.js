@@ -34,7 +34,7 @@ app.post('/tasks', (req, res) => {
 app.get('/tasks', (req, res) => {
   console.log('/tasks get hit!');
 
-  const queryString = `SELECT * FROM tasks`; //todo order by ___?
+  const queryString = `SELECT * FROM tasks ORDER BY id`;
 
   pool.query(queryString).then( (results) => {
     res.send(results.rows);
