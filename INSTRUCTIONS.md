@@ -23,22 +23,22 @@ You are going to create a 'TO DO' application. This type of application is very 
 
 ### Styling
 
-Use CSS styling to move the aesthetic of the page beyond the vanilla HTML look:
-  - background color of the page
-  - font family and size
-  - text color & or background color of tasks *to show whether or not they have been completed*
+<!-- Use CSS styling to move the aesthetic of the page beyond the vanilla HTML look: -->
+  <!-- - background color of the page -->
+  <!-- - font family and size -->
+  <!-- - text color & or background color of tasks *to show whether or not they have been completed* -->
 
 ### Approach
 
-We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park!
+<!-- We would recommend you spend some time thinking about how to approach this problem. Think through all the logic that will be needed prior to writing any code. Take your time, relax, remember that impostor syndrome is real, and that you are capable of knocking this out of the park! -->
 
 ### Create a Database
 
-Be sure to create a new database through Postico. Use the name `weekend-to-do-app`. You will need to use this name in your database connection configuration on your server.
+<!-- Be sure to create a new database through Postico. Use the name `weekend-to-do-app`. You will need to use this name in your database connection configuration on your server. -->
 
 ### Database Structure
 
-Please include a `database.sql` text file in your repo that includes all of your `CREATE TABLE` queries. This is so we can re-create your database while testing your app.
+<!-- Please include a `database.sql` text file in your repo that includes all of your `CREATE TABLE` queries. This is so we can re-create your database while testing your app. -->
 
 ## Stretch Goals
 

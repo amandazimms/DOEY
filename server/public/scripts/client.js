@@ -57,6 +57,15 @@ function addNewTask(){
 
 function displayAllTasks(){
 
+
+  Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue',
+    icon: 'error',
+    confirmButtonText: 'Cool'
+  })
+
+  
   $.ajax({
     method: 'GET',
     url: '/tasks'
