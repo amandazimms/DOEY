@@ -64,3 +64,16 @@ app.put('/tasks', (req,res) => {
   })
 
 })
+
+//DELETE
+app.delete('/tasks', (req,res)=> {
+  console.log('/tasks delete hit:', req.query);
+  const queryString = `DELETE FROM tasks WHERE id='${req.query.id}';`;
+
+  pool.query(queryString).then((results)=>{
+    res.sendStatus(200);
+  }).catch((err)=>{
+    console.log('error deleting task from database:', err);
+    res.sendStatus(500);
+  })
+})

@@ -5,6 +5,8 @@ $( document ).ready( function(){
 function setupClickListeners() {
   $( '#addTaskButton' ).on( 'click', addNewTask );
   $('#outputDiv').on('click', '.check-box', checkBoxToMarkComplete);
+  $('#outputDiv').on('click', '.deleteTaskButton', removeTask);
+
 }
 
 function checkBoxToMarkComplete(){
@@ -65,7 +67,9 @@ function displayAllTasks(){
       else 
         stringToAppend += `<input type='checkbox' class='check-box' data-id='${response[i].id}'></input>`;
 
-      stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a><br>`;
+      stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a>
+                        <button class='deleteTaskButton' data-id='${response[i].id}'>Delete</button>
+                        <br>`;
 
       outputArea.append(stringToAppend);
        
@@ -75,5 +79,19 @@ function displayAllTasks(){
   }).catch(function(err) {
     console.log('error getting tasks from server:', err);
     alert('error getting tasks from server - see console');
+  });
+}
+
+function removeTask(){
+  $.ajax({
+    method: 'DELETE',
+    url: '/tasks?id=' + $(this).data('id'), 
+
+  }).then(function(response){
+    displayAllTasks();
+
+  }).catch(function(err){
+    console.log('error deleting task', err);
+    alert(`error deleting task - see console`);
   });
 }
