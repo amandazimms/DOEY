@@ -1,8 +1,12 @@
+* {
+  font-family: 'Source Code Pro', monospace;
+}
+
 #taskIn {
   width: 300px;
 }
 
-.checkButton {
+.iconButton {
   /* width: 15px;
   height: 15px; */
   background: none;
@@ -12,9 +16,14 @@
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
+  margin: 0 5px 0 5px;
 }
 
-.checkImg{
+.iconImg{
   width: 15px;
   height: 15px;
+}
+
+.task{
+  margin: 10px;
 }

@@ -8,7 +8,7 @@ function setupClickListeners() {
   $( '#addTaskButton' ).on( 'click', addNewTask );
   $('#outputDiv').on('click', '.checkButtonUnchecked', {param: true}, toggleCheck);
   $('#outputDiv').on('click', '.checkButtonChecked', {param: false}, toggleCheck);
-  $('#outputDiv').on('click', '.deleteTaskButton', removeTask);
+  $('#outputDiv').on('click', '.deleteButton', removeTask);
 }
 
 function toggleCheck(_bool){  
@@ -69,14 +69,14 @@ function displayAllTasks(){
       let stringToAppend = '';
       
       if(response[i].completed) {
-        stringToAppend += `<button class="checkButton checkButtonChecked " data-id='${response[i].id}'><img class="checkImg imgChecked" src="./images/checkedBox.png" alt="Checked-Box"></img></button>`;
+        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonChecked " data-id='${response[i].id}'><img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task"></img></button>`;
       }
       else {
-        stringToAppend += `<button class="checkButton checkButtonUnchecked" data-id='${response[i].id}'><img class="checkImg imgUnchecked" src="./images/box.png" alt="Unchecked-Box"></img></button>`;
+        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'><img class="iconImg" src="./images/box.png" alt="Complete Task"></img></button>`;
       }
       stringToAppend += `<a data-id='${response[i].id}'>${response[i].task}</a>
-                        <button class='deleteTaskButton' data-id='${response[i].id}'>Delete</button>
-                        <br>`;
+                        <button class="iconButton deleteButton" data-id='${response[i].id}'><img class="iconImg" src="./images/trash.png" alt="Delete Task"></img></button>
+                        <br></div>`;
 
       outputArea.append(stringToAppend);    
     }
@@ -88,6 +88,7 @@ function displayAllTasks(){
 }
 
 function removeTask(){
+  console.log(' in remove');
   $.ajax({
     method: 'DELETE',
     url: '/tasks?id=' + $(this).data('id'), 
