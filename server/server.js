@@ -18,18 +18,7 @@ app.listen(PORT, () => {
 app.post('/tasks', (req, res) => {
   console.log('/tasks post hit! req.body is:', req.body);
 
-   //timeCompleted to_char(current_timestamp, 'FMDay, Mon FMDD  HH12:MI') NOT NULL	
-
-  const now = new Date();
-  console.log('now is', now);
-  // const testQS = `to_timestamp(${now})`;
-  // console.log('"parsed now" is', testQS);
-
-  //const queryString= `INSERT INTO tasks (task, completed, time_completed) VALUES ($1, $2, to_timestamp(${now}))`;
   let queryString= `INSERT INTO tasks (task, completed, time_completed) VALUES ($1, $2, CURRENT_TIMESTAMP)`;
-  // let queryString = `INSERT INTO "tasks" ( "task", "task_complete", "update_time")
-  // VALUES ($1, $2, CURRENT_TIMESTAMP );`;
-
   let values = [req.body.task, req.body.completed];
 
   pool.query(queryString, values).then((results)=>{
@@ -60,11 +49,19 @@ app.get('/tasks', (req, res) => {
 app.put('/tasks', (req,res) => {
   console.log( '/tasks put hit:', req.query );
 
-  let key = `${Object.keys(req.body)[0]}` //this gets, for example, 'completed' from client PUT's data
-  let val = `${req.body[key]}` //this gets, for example, 'true' from client PUT's data
+  let queryString = `UPDATE tasks SET `
 
-  const queryString =   `UPDATE tasks SET ${key}=${val}
-                        WHERE id = '${req.query.id}';`;
+  for(const property in req.body){ //iterate through the req.body object (which should contain 2 properties, for this project)
+    // let key = `${Object.keys(req.body)[properties]}` //this gets, for example, 'completed' from client PUT's data
+    // let val = `${req.body[key]}` //this gets, for example, 'true' from client PUT's data
+
+    // queryString += `${key}=${val}`
+    queryString += `${property}=${req.body[property]} `;   
+  }
+
+  queryString += `WHERE id = '${req.query.id}';`;
+
+  console.log('queryString', queryString);
 
   pool.query(queryString).then( (results) => {
     res.sendStatus(200);
