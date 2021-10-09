@@ -36,9 +36,12 @@ body {
 }
 
 .iconButton {
+<<<<<<< HEAD
   margin: 0 5px 0 5px;
 
   /* below this line removes all button styles, since we want these icons to just look like images */
+=======
+>>>>>>> ecf4bc1502518233230226848614c2865e70c0eb
   background: none;
 	color: inherit;
 	border: none;
