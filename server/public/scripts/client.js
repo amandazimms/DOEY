@@ -14,14 +14,24 @@ function setupClickListeners() {
 function toggleCheck(_bool){  
   let bool = _bool.data.param;
 
-  let dataToSend = 'completed=false';
-  if (bool)
-    dataToSend = 'completed=true'; 
+  let completedValue = false;
+  let pointlessBoolVal = false;
+
+  //let dataToSend = 'completed=false';
+  if (bool){
+    completedValue = true; 
+    pointlessBoolVal = true;
+  }
+
+  let objectToSend = {
+    completed: completedValue,
+    pointless_bool: pointlessBoolVal
+  }
 
     $.ajax({
       method: 'PUT',
       url: '/tasks?id=' + $(this).data('id'), 
-      data: dataToSend
+      data: objectToSend
   
     }).then(function(response){
       displayAllTasks();
