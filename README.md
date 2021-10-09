@@ -21,6 +21,7 @@ This To-Do List app lets you create tasks and mark them as completed. Task data 
 * As you finish tasks, click the box to the left of that particular task
   * The task is updated so its "completion status" changes to "complete, with a GET via ajax > express > SQL to the client > server > database and back.
   * Completed tasks show a checked box image, their text is lightened and shown with linethrough - don't worry about it, it's done! :)
+  * The date and time a task was completed are also displayed next to finished tasks. DOEY runs in CST, 12hr time. 
 * To remove a task (whether it's been completed or not), click the trash icon to the right of that particular task. The DELETE request is sent to via ajax > express > SQL to the client > server > database and back. 
   * An alert is displayed - are you sure you want to delete? 
   * DOEY respects your privacy and does not store deleted tasks - rest easy knowing that once that hemorrhoid appointment is deleted, it's GONE.
