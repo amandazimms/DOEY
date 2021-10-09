@@ -37,7 +37,7 @@ function addNewTask(){
 
   let taskObj = {
     task: taskString,
-    completed: false
+    completed: false,
   }
 
   $.ajax({
@@ -66,18 +66,20 @@ function displayAllTasks(){
     outputArea.empty();
 
     for(let i=0; i<response.length; i++){
-      let stringToAppend = '';
+      let stringToAppend = '<div class="task">';
       
       if(response[i].completed) {
-        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonChecked " data-id='${response[i].id}'>
-                          <img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task">
-                          </img></button>
+        stringToAppend += `<button class="iconButton checkButton checkButtonChecked " data-id='${response[i].id}'>
+                            <img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task">
+                            </img>
+                          </button>
                           <a class="taskText taskComplete" data-id='${response[i].id}'>${response[i].task}</a>`;
       }
       else {
-        stringToAppend += `<div class="task"><button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'>
-                          <img class="iconImg" src="./images/box.png" alt="Complete Task">
-                          </img></button>
+        stringToAppend += `<button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'>
+                              <img class="iconImg" src="./images/box.png" alt="Complete Task">
+                              </img>
+                          </button>
                           <a class="taskText" data-id='${response[i].id}'>${response[i].task}</a>`;
       }
       stringToAppend += `<button class="iconButton deleteButton" data-id='${response[i].id}'><img class="iconImg" src="./images/trash.png" alt="Delete Task"></img></button>
