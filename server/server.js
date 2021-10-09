@@ -18,8 +18,7 @@ app.listen(PORT, () => {
 app.post('/tasks', (req, res) => {
   console.log('/tasks post hit! req.body is:', req.body);
 
-  let queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`;
-    //, CURRENT_TIMESTAMP)`;
+  let queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`; //$1, etc sanitizes data
   let values = [req.body.task, req.body.completed];
 
   pool.query(queryString, values).then((results)=>{
@@ -68,6 +67,7 @@ app.put('/tasks', (req,res) => {
     
       queryString += ` `; //add a space regardless
   }
+
   //QS STEP 3: += the timestamp onto the queryString
   //todo - this is not modular or really correct - 
   //if we had a way to update another aspect of the task, it would also update
@@ -80,12 +80,12 @@ app.put('/tasks', (req,res) => {
 
   pool.query(queryString).then( (results) => {
     res.sendStatus(200);
+    
   }).catch( (err) =>{
     console.log('error updating task in database:', err);
     res.sendStatus(500);
 
   })
-
 })
 
 //DELETE

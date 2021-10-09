@@ -3,13 +3,19 @@
 }
 
 h1 {
+  font-size: 40px;
   margin-left: 15px;
   font-weight: bold;
 }
+
+h3 {
+  margin-left: 15px;
+}
+
 button {
   border-radius: 0;
   border-style: none;
-  background-color: rgb(133, 160, 165);
+  background-color: rgb(175, 125, 180);
   padding: 5px 8px 5px 8px;
 }
 
@@ -17,12 +23,12 @@ input {
   margin: 0 0 15px 15px;
   border-radius: 0;
   border-style: none;
-  background-color: rgb(174, 197, 201);
+  background-color: rgb(201, 174, 201);
   padding: 5px 8px 5px 8px;
 }
 
 body {
-  background-color: rgb(232, 241, 241);
+  background-color: rgb(241, 232, 240);
 }
 
 #taskIn {
@@ -30,8 +36,9 @@ body {
 }
 
 .iconButton {
-  /* width: 15px;
-  height: 15px; */
+  margin: 0 5px 0 5px;
+
+  /* below this line removes all button styles, since we want these icons to just look like images */
   background: none;
 	color: inherit;
 	border: none;
@@ -39,7 +46,6 @@ body {
 	font: inherit;
 	cursor: pointer;
 	outline: inherit;
-  margin: 0 5px 0 5px;
 }
 
 .iconImg{
