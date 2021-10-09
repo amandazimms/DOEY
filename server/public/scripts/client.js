@@ -78,7 +78,9 @@ function displayAllTasks(){
                             <img class="iconImg" src="./images/checkedBox.png" alt="Un-Complete Task">
                             </img>
                           </button>
-                          <a class="taskText taskComplete" data-id='${response[i].id}'>${response[i].task}</a>`;
+                          <a class="taskText taskComplete" data-id='${response[i].id}'>${response[i].task}</a>
+                          <a class="timeStamp">${response[i].time_completed}</a>
+                          `;
       }
       else {
         stringToAppend += `<button class="iconButton checkButton checkButtonUnchecked" data-id='${response[i].id}'>
