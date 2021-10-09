@@ -11,21 +11,16 @@ function setupClickListeners() {
   $('#outputDiv').on('click', '.deleteButton', removeTask);
 }
 
-function toggleCheck(_bool){  
-  let bool = _bool.data.param;
+function toggleCheck(_isComplete){  
+  let isComplete = _isComplete.data.param;
 
-  let completedValue = false;
-  let pointlessBoolVal = false;
-
-  //let dataToSend = 'completed=false';
-  if (bool){
-    completedValue = true; 
-    pointlessBoolVal = true;
-  }
-
+  //note - this project is fully ready to accept and send objects with
+  //multiple properties to server and then db!
+  //tragically it was not required here, as we are timestamping
+  //in server, when creating the querystring
   let objectToSend = {
-    completed: completedValue,
-    pointless_bool: pointlessBoolVal
+    completed: isComplete
+    //in the future - add more properties to update here!
   }
 
     $.ajax({
