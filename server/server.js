@@ -49,7 +49,6 @@ app.get('/tasks', (req, res) => {
 //PUT
 app.put('/tasks', (req,res) => {
   console.log( '/tasks put hit:', req.query );
-  console.log('req.body', req.body);
   
   //QS STEP 1: begin the query string the same each time.
   let queryString = `UPDATE tasks SET `
@@ -74,11 +73,10 @@ app.put('/tasks', (req,res) => {
   //if we had a way to update another aspect of the task, it would also update
   //the completed_time to now, which we wouldn't want. As is there is only one thing to
   //update so it's ok for the scope of this project IMHO.
-  queryString += `, time_completed=CURRENT_TIMESTAMP `;
+  queryString += `, time_completed=now() `;
 
   //QS STEP 4: += the end, where we target which row in the db we're updating
   queryString += `WHERE id = '${req.query.id}';`;
-
 
   pool.query(queryString).then( (results) => {
     res.sendStatus(200);

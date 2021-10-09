@@ -5,6 +5,7 @@ CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
     task varchar(200) NOT NULL,
     completed boolean NOT NULL,
-    time_completed timestamptz NOT NULL	
+    time_completed timestamptz 
 );
+
 

@@ -55,3 +55,8 @@ body {
   text-decoration: line-through;
   color: rgb(158, 158, 158)
 }
+
+.timeStampCompleted {
+  color: rgb(158, 158, 158);
+  font-size: 10px;
+}
