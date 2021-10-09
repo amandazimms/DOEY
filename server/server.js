@@ -18,7 +18,8 @@ app.listen(PORT, () => {
 app.post('/tasks', (req, res) => {
   console.log('/tasks post hit! req.body is:', req.body);
 
-  const queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`;
+  let queryString= `INSERT INTO tasks (task, completed) VALUES ($1, $2)`;
+    //, CURRENT_TIMESTAMP)`;
   let values = [req.body.task, req.body.completed];
 
   pool.query(queryString, values).then((results)=>{
@@ -48,12 +49,34 @@ app.get('/tasks', (req, res) => {
 //PUT
 app.put('/tasks', (req,res) => {
   console.log( '/tasks put hit:', req.query );
+  
+  //QS STEP 1: begin the query string the same each time.
+  let queryString = `UPDATE tasks SET `
 
-  let key = `${Object.keys(req.body)[0]}` //this gets, for example, 'completed' from client PUT's data
-  let val = `${req.body[key]}` //this gets, for example, 'true' from client PUT's data
+  //QS STEP 2: += as many additional properties into the query string as you want to update 
+  //(as many properties as your req.body object has in it)
+  let keys = Object.keys(req.body); //simplify naming here - keys is the array of keys
+  for(let i=0; i<keys.length; i++){ //iterate through the keys
+    
+    let key = `${keys[i]}` //this gets, for example, 'completed' from client PUT's data
+    let val = `${req.body[key]}` //this gets, for example, 'true' from client PUT's data
+    
+    queryString += `${key}=${val}` //add it onto the query string
+  
+    if (i !== keys.length -1) //we only want to add a comma if there will be another..
+      queryString += `,`; //..property to update after this one
+    
+      queryString += ` `; //add a space regardless
+  }
+  //QS STEP 3: += the timestamp onto the queryString
+  //todo - this is not modular or really correct - 
+  //if we had a way to update another aspect of the task, it would also update
+  //the completed_time to now, which we wouldn't want. As is there is only one thing to
+  //update so it's ok for the scope of this project IMHO.
+  queryString += `, time_completed=now() `;
 
-  const queryString =   `UPDATE tasks SET ${key}=${val}
-                        WHERE id = '${req.query.id}';`;
+  //QS STEP 4: += the end, where we target which row in the db we're updating
+  queryString += `WHERE id = '${req.query.id}';`;
 
   pool.query(queryString).then( (results) => {
     res.sendStatus(200);
