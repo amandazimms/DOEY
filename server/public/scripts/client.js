@@ -160,8 +160,8 @@ function makePrettyTimeStamp(timeStampIn) {
   let day = timeChunkArray.slice(2, 3)[0];
 
   let hourUTC = timeChunkArray.slice(3, 4)[0]; //it's already stored as utc
-  let hourCST = String(hourUTC-5); //to get CST, subtract 5, and be sure to store as a string so no unintended math is performed after this
-  let amPM = hourCST > 12 ? "pm" : "am"; //in military time, > 12 means PM
+  let hourCST = hourUTC > 5 ? String(hourUTC-5) : hourCST = String(hourUTC+19); //convert to central time - subtract 5h, unless the hour is between 1 and 5am (don't want negative numbers). Store the result as a string
+  let amPM = hourCST >= 12 ? "pm" : "am"; //in military time, 12 and anything higher means PM
   let hourTwelveHR = hourCST > 12 ? String(hourCST-12) : String(hourCST); //convert to 12hr time
   let min = timeChunkArray.slice(4, 5)[0]; 
   //note - I chose not to display seconds for this project
