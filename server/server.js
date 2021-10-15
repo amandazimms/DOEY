@@ -48,6 +48,9 @@ app.get('/tasks', (req, res) => {
 //PUT
 app.put('/tasks', (req,res) => {
   console.log( '/tasks put hit:', req.query );
+  console.log( '******** req.query is', req.query );
+  console.log( '******** req.query.id is', req.query.id );
+
   
   //QS STEP 1: begin the query string the same each time.
   let queryString = `UPDATE tasks SET `
